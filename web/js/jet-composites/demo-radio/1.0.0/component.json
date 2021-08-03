@@ -1,0 +1,30 @@
+{
+  "name": "demo-radio",
+  "version": "1.0.0",
+  "jetVersion": "^11.0.0",
+  "displayName": "A user friendly, translatable name of the component.",
+  "description": "A translatable high-level description for the component.",
+  "properties": {
+    "value":{
+      "type":"string",
+      "description":"value",
+      "writeback":true
+    },"amount":{
+      "type":"number",
+      "description":"amount",
+      "writeback":true
+    },
+    "options":{
+      "type":"array<object>"
+    }
+  },
+  "methods": {
+
+  }, 
+  "events": {
+
+  }, 
+  "slots": {
+
+  }
+}
