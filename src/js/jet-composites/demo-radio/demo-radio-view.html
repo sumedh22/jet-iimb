@@ -1,0 +1,17 @@
+<oj-bind-for-each data="[[ $properties.options ]]">
+  <template>
+    <div class="oj-flex-bar oj-sm-justify-content-space-between oj-sm-align-items-baseline"
+      on-click="[[handleRadioSelection]]">
+      <oj-radioset value="{{value}}">
+        <oj-option value="[[$current.data.payTowardsType]]"></oj-option>
+      </oj-radioset>
+      <div class="oj-sm-6">
+        <oj-bind-text value="[[$current.data.payTowardsType]]"></oj-bind-text>
+      </div>
+      <oj-input-number disabled="[[$current.data.payTowardsType !== value()]]" min="[[$current.data.minAmt]]"
+        value="{{$current.data.payTowardsType === value() ? amount : null}}" :id="[[$current.data.payTowardsType]]"
+        class="oj-sm-4">
+      </oj-input-number>
+    </div>
+  </template>
+</oj-bind-for-each>
