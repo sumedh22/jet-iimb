@@ -20,20 +20,36 @@ define(
       var busyContext = Context.getContext(context.element).getBusyContext();
       var options = { "description": "Web Component Startup - Waiting for data" };
       self.busyResolve = busyContext.addBusyState(options);
-
-      self.groups = ko.observableArray(transform(context.properties.meta));
+      self.properties = context.properties;
+      self.groups = ko.observableArray(transform(self.properties.meta));
       self.total = ko.observable()
+      self.selectedIds = ko.observable()
 
+      self.total.subscribe(value => {
+        self.properties.setProperty('amount', value)
+      })
+      self.selectedIds.subscribe(value => {
+        self.properties.setProperty('selectedId', value)
+      })
       self.handleChange = () => {
-        const amts = self.groups().map(gr=>{
-          return document.getElementById(gr.name+ (gr.selection === 'SINGLE'? '-radio':'-checkbox'))?.getProperty('amount')
+        const amts = self.groups().map(gr => {
+          const el = document.getElementById(gr.name + (gr.selection === 'SINGLE' ? '-radio' : '-checkbox'))
+
+          return {
+            selectedIds: el?.getProperty('selectedId'),
+            amount: el?.getProperty('amount')
+          }
+
         })
-        self.total(amts.reduce((acc, curr) => { acc += curr; return acc }, 0))
+        self.total(amts.reduce((acc, curr) => { acc += curr.amount; return acc }, 0))
+        self.selectedIds(amts.reduce((acc, curr) => {
+          return acc.concat(curr.selectedIds)
+        }, []))
       }
       self.composite = context.element;
       self.busyResolve();
 
-      self.showMessages = function(){
+      self.showMessages = function () {
         document.getElementById(self.validationId).showMessages();
       }
     };

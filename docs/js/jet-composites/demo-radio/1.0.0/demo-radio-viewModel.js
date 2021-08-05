@@ -6,59 +6,59 @@
 */
 'use strict';
 define(
-    ['knockout', 'ojL10n!./resources/nls/demo-radio-strings', 'ojs/ojcontext', 'ojs/ojknockout','ojs/ojradioset','ojs/ojinputnumber'], function (ko, componentStrings, Context) {
-    
+  ['knockout', 'ojL10n!./resources/nls/demo-radio-strings', 'ojs/ojcontext', 'ojs/ojknockout', 'ojs/ojradioset', 'ojs/ojinputnumber'], function (ko, componentStrings, Context) {
+
     function RadioComponentModel(context) {
-        var self = this;
-        
-        //At the start of your viewModel constructor
-        var busyContext = Context.getContext(context.element).getBusyContext();
-        var options = {"description": "Web Component Startup - Waiting for data"};
-        self.busyResolve = busyContext.addBusyState(options);
-        self.composite = context.element;
-          self.value = ko.observable()
-          self.amount = ko.observable()
-          self.showMessage = ko.observable(false)
-        self.groupValid = ko.observable();
-          self.value.subscribe(val=>{
-            self.amount(self.properties.options.find(op=>op.id === val).fixedAmt)
-            self.properties.setProperty('selectedId', val)
-          })
-          self.amount.subscribe(val => {
-            self.properties.setProperty('amount', val)
-          })
-        self.properties = context.properties;
-        // self.data = ko.observable( self.properties.options.map(op=>({value: op.fixedAmt})))
-        self.res = componentStrings['demo-radio'];
+      var self = this;
 
-        //Once all startup and async activities have finished, relocate if there are any async activities
-        self.busyResolve();
+      //At the start of your viewModel constructor
+      var busyContext = Context.getContext(context.element).getBusyContext();
+      var options = { "description": "Web Component Startup - Waiting for data" };
+      self.busyResolve = busyContext.addBusyState(options);
+      self.composite = context.element;
+      self.value = ko.observable()
+      self.amount = ko.observable()
+      self.showMessage = ko.observable(false)
+      self.groupValid = ko.observable();
+      self.value.subscribe(val => {
+        self.amount(self.properties.options.find(op => op.id === val).fixedAmt)
+        self.properties.setProperty('selectedId', val)
+      })
+      self.amount.subscribe(val => {
+        self.properties.setProperty('amount', val)
+      })
+      self.properties = context.properties;
+      // self.data = ko.observable( self.properties.options.map(op=>({value: op.fixedAmt})))
+      self.res = componentStrings['demo-radio'];
 
-        self.handleRadioSelection = function(_, row) {
-          self.value(row.data.id)
+      //Once all startup and async activities have finished, relocate if there are any async activities
+      self.busyResolve();
+
+      self.handleRadioSelection = function (_, row) {
+        self.value(row.data.id)
       }
 
       self.validate(!this.properties.selectedId)
-      self.showMessages = function(){
+      self.showMessages = function () {
         self.showMessage(true)
         self.validate(!this.properties.selectedId)
-        
+
       };
 
-      self.groupValid.subscribe(v=>{
-        if(v!== 'valid'){
-          this.properties.setProperty('valid',v)
+      self.groupValid.subscribe(v => {
+        if (v !== 'valid') {
+          this.properties.setProperty('valid', v)
         }
       })
     };
 
-    RadioComponentModel.prototype.validate = function(value){
-      this.properties.setProperty('valid','pending')
-          if(this.properties.required && value){
-            this.properties.setProperty('valid', this.showMessage() ?'invalidShown': 'invalidHidden')
-          }else{
-            this.properties.setProperty('valid',this.groupValid())
-          }
+    RadioComponentModel.prototype.validate = function (value) {
+      this.properties.setProperty('valid', 'pending')
+      if (this.properties.required && value) {
+        this.properties.setProperty('valid', this.showMessage() ? 'invalidShown' : 'invalidHidden')
+      } else {
+        this.properties.setProperty('valid', this.groupValid())
+      }
     };
     //Lifecycle methods - uncomment and implement if necessary 
     //ExampleComponentModel.prototype.activated = function(context){
@@ -73,11 +73,11 @@ define(
     //ExampleComponentModel.prototype.disconnected = function(context){
     //};
 
-    RadioComponentModel.prototype.propertyChanged = function(ctx){
-      if(ctx.property === 'selectedId'){
+    RadioComponentModel.prototype.propertyChanged = function (ctx) {
+      if (ctx.property === 'selectedId') {
         this.validate(!ctx.value)
       }
     };
 
     return RadioComponentModel;
-});
+  });

@@ -1,15 +1,16 @@
 <div>
-  <oj-validation-group id="validate">
-    <demo-amount meta="[[metaPayTowards]]"></demo-amount>
+  <oj-validation-group id="validate" valid="{{valid}}">
+    <demo-amount meta="[[metaPayTowards]]" amount="{{amountToPay}}" selected-id="{{subscriptions}}"></demo-amount>
   </oj-validation-group>
-  <oj-button on-oj-action="[[handleValidate]]">Validate</oj-button>
-</div>
-
-<div>
-  <h4>
-    <oj-bind-text value="[[value]]"></oj-bind-text>
-  </h4>
-  <h4>
-    <oj-bind-text value="[[amount]]"></oj-bind-text>
-  </h4>
+  <oj-button on-oj-action="[[handleValidate]]" disabled="[[ valid() !== 'valid' ]]">
+    <div>
+      <oj-bind-if test="[[!amountToPay()]]">
+        <div>Make Payment</div>
+      </oj-bind-if>
+      <oj-bind-if test="[[amountToPay]]">
+        <oj-bind-text value="[['Proceed to pay '+ amountToPay() +' Subscriptions: '+subscriptions().join(', ')]]">
+        </oj-bind-text>
+      </oj-bind-if>
+    </div>
+  </oj-button>
 </div>

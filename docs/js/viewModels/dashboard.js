@@ -91,15 +91,16 @@ define(['accUtils','knockout','demo-amount/loader','ojs/ojbutton','ojs/ojvalidat
             "required": true
          }
       ]
-
-     this.value = ko.observable();
-     this.amount = ko.observable();
+     
+     this.valid = ko.observable();
+     this.subscriptions = ko.observableArray();
+     this.amountToPay = ko.observable();
       this.handleValidate = () => {
         const el = document.getElementById('validate')
-const valid = el.getProperty('valid')
-if(valid !== 'valid'){
-el.showMessages()
-}
+        const valid = el.getProperty('valid')
+        if(valid !== 'valid'){
+        el.showMessages()
+        }
       }
       this.connected = () => {
         accUtils.announce('Dashboard page loaded.', 'assertive');
