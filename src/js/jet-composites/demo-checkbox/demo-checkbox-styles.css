@@ -1,0 +1,17 @@
+/* This file is where css selectors for the component go.
+   There will be hard coded properties and properties controlled by variables, for example
+
+   demo-checkbox .demo-checkbox-value-text {
+   color: var(--demo-checkbox-value-text-color);
+   display: inline-block;
+	 }
+*/
+
+demo-checkbox:not(.oj-complete){
+  visibility: hidden;
+}
+
+demo-checkbox{
+	min-height: 50px;
+	width: 50px;
+}

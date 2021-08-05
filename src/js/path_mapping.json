@@ -13,6 +13,18 @@
 
   "libs": {
 
+    "knockout-mapping": {
+      "cdn": "3rdparty",
+      "cwd": "node_modules/knockout-mapping/dist",
+      "debug": {
+        "src": "knockout.mapping.js",
+        "path": "libs/knockout-mapping/knockout-mapping.js"
+      },
+      "release": {
+        "src": "knockout.mapping.min.js",
+        "path": "libs/knockout-mapping/knockout-mapping.min.js"
+      }
+    },
     "knockout": {
       "cdn": "3rdparty",
       "cwd": "node_modules/knockout/build/output",

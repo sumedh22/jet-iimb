@@ -30,6 +30,7 @@
 // injector:mainReleasePaths
 
 {
+  "knockout-mapping":"libs/knockout-mapping/knockout-mapping",
   "knockout":"libs/knockout/knockout-3.5.1.debug",
   "jquery":"libs/jquery/jquery-3.6.0",
   "jqueryui-amd":"libs/jquery/jqueryui-amd-1.12.1",
@@ -52,6 +53,8 @@
   "css-builder":"libs/require-css/css-builder",
   "normalize":"libs/require-css/normalize",
   "jet-composites":"jet-composites",
+  "demo-amount":"jet-composites/demo-amount/1.0.0",
+  "demo-checkbox":"jet-composites/demo-checkbox/1.0.0",
   "demo-radio":"jet-composites/demo-radio/1.0.0"
 }
 

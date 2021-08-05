@@ -1,0 +1,17 @@
+/* This file is where css selectors for the component go.
+   There will be hard coded properties and properties controlled by variables, for example
+
+   demo-amount .demo-amount-value-text {
+   color: var(--demo-amount-value-text-color);
+   display: inline-block;
+	 }
+*/
+
+demo-amount:not(.oj-complete){
+  visibility: hidden;
+}
+
+demo-amount{
+	min-height: 50px;
+	width: 50px;
+}

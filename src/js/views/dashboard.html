@@ -1,5 +1,8 @@
 <div>
-  <demo-radio options="[[metaPayTowardsSINGLE]]" value="{{value}}" amount="{{amount}}"></demo-radio>
+  <oj-validation-group id="validate">
+    <demo-amount meta="[[metaPayTowards]]"></demo-amount>
+  </oj-validation-group>
+  <oj-button on-oj-action="[[handleValidate]]">Validate</oj-button>
 </div>
 
 <div>

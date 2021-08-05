@@ -1,0 +1,40 @@
+<oj-validation-group :id="[[validationId]]" valid="{{ $properties.valid }}">
+  
+<oj-form-layout 
+label-edge="top">
+  <oj-bind-for-each data="{{groups}}">
+    <template>
+    <oj-bind-if test="[[$current.data.selection === 'SINGLE']]">
+      <demo-radio 
+      :id="[[$current.data.name + '-radio']]"
+      label-hint="[[$current.data.name]]" 
+      options="[[$current.data.options]]" 
+      amount="{{$current.data.amount}}" 
+      selected-id="{{$current.data.selectedId}}"
+      on-amount-changed="[[handleChange]]"
+      on-selected-id-changed="[[handleChange]]"
+      required="[[$current.data.required]]"
+      ></demo-radio>
+    </oj-bind-if>
+    <oj-bind-if test="[[$current.data.selection === 'MULTIPLE']]">
+      <demo-checkbox 
+      :id="[[$current.data.name + '-checkbox']]"
+      on-amount-changed="[[handleChange]]"
+      on-selected-id-changed="[[handleChange]]" 
+      label-hint="[[$current.data.name]]" 
+      options="[[$current.data.options]]" 
+      amount="{{$current.data.amount}}" 
+      selected-id="{{$current.data.selectedId}}"
+      required="[[$current.data.required]]"
+      ></demo-checkbox>
+    </oj-bind-if>
+    </template>
+    </oj-bind-for-each>
+    <oj-input-number
+    id="totalAmount"
+    value="[[total]]"
+    label-hint="Total Amount"
+    readonly="true"
+    ></oj-input-number>
+  </oj-form-layout>
+</oj-validation-group>

@@ -1,0 +1,40 @@
+{
+  "name": "demo-amount",
+  "version": "1.0.0",
+  "jetVersion": "^11.0.0",
+  "displayName": "A user friendly, translatable name of the component.",
+  "description": "A translatable high-level description for the component.",
+  "properties": {
+    "valid":{
+      "type": "string",
+      "readOnly": true,
+      "enumValues": ["valid","pending","invalidHidden","invalidShown"]
+    },
+    "required":{
+      "type": "boolean",
+      "description": "required or not"
+    },
+    "meta":{
+      "type": "Array<object>"
+    },
+    "selectedId":{
+      "type": "array<number>",
+      "writeback": true
+    },
+    "amount":{
+      "type": "number",
+      "writeback": true
+    }
+  },
+  "methods": {
+    "showMessages":{
+      "description": "show validation messages"
+    }
+  }, 
+  "events": {
+
+  }, 
+  "slots": {
+
+  }
+}

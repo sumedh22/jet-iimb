@@ -18,10 +18,11 @@ define(
         self.composite = context.element;
           self.value = ko.observable()
           self.amount = ko.observable()
-          
+          self.showMessage = ko.observable(false)
+        self.groupValid = ko.observable();
           self.value.subscribe(val=>{
-            self.amount(self.properties.options.find(op=>op.payTowardsType === val).fixedAmt)
-            self.properties.setProperty('value', val)
+            self.amount(self.properties.options.find(op=>op.id === val).fixedAmt)
+            self.properties.setProperty('selectedId', val)
           })
           self.amount.subscribe(val => {
             self.properties.setProperty('amount', val)
@@ -34,8 +35,30 @@ define(
         self.busyResolve();
 
         self.handleRadioSelection = function(_, row) {
-          self.value(row.data.payTowardsType)
+          self.value(row.data.id)
       }
+
+      self.validate(!this.properties.selectedId)
+      self.showMessages = function(){
+        self.showMessage(true)
+        self.validate(!this.properties.selectedId)
+        
+      };
+
+      self.groupValid.subscribe(v=>{
+        if(v!== 'valid'){
+          this.properties.setProperty('valid',v)
+        }
+      })
+    };
+
+    RadioComponentModel.prototype.validate = function(value){
+      this.properties.setProperty('valid','pending')
+          if(this.properties.required && value){
+            this.properties.setProperty('valid', this.showMessage() ?'invalidShown': 'invalidHidden')
+          }else{
+            this.properties.setProperty('valid',this.groupValid())
+          }
     };
     //Lifecycle methods - uncomment and implement if necessary 
     //ExampleComponentModel.prototype.activated = function(context){
@@ -50,8 +73,11 @@ define(
     //ExampleComponentModel.prototype.disconnected = function(context){
     //};
 
-    //ExampleComponentModel.prototype.propertyChanged = function(context){
-    //};
+    RadioComponentModel.prototype.propertyChanged = function(ctx){
+      if(ctx.property === 'selectedId'){
+        this.validate(!ctx.value)
+      }
+    };
 
     return RadioComponentModel;
 });

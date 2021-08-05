@@ -8,83 +8,99 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['accUtils','knockout','demo-radio/loader'],
+define(['accUtils','knockout','demo-amount/loader','ojs/ojbutton','ojs/ojvalidationgroup'],
  function(accUtils,ko) {
     function DashboardViewModel() {
       this.metaPayTowards = [
-        {
-           "displayOrder":1,
-           "minAmt":500,
-           "conversionRate":0,
-           "showOnWeb":"Y",
-           "groupName":"First Group",
-           "selection":"SINGLE",
-           "currency":"INR",
-           "fixedAmt":500,
-           "payTowardsType":"First Pay Towards Type"
-        },
-        {
-           "displayOrder":2,
-           "minAmt":1000,
-           "conversionRate":0,
-           "showOnWeb":"Y",
-           "groupName":"First Group",
-           "selection":"SINGLE",
-           "currency":"INR",
-           "fixedAmt":1000,
-           "payTowardsType":"Second Pay Towards Type"
-        },
-        {
-           "displayOrder":3,
-           "minAmt":1500,
-           "conversionRate":0,
-           "showOnWeb":"Y",
-           "groupName":"First Group",
-           "selection":"SINGLE",
-           "currency":"INR",
-           "fixedAmt":1500,
-           "payTowardsType":"Third Pay Towards Type"
-        },
-        {
-           "displayOrder":1,
-           "minAmt":2000,
-           "conversionRate":0,
-           "showOnWeb":"Y",
-           "groupName":"Second Group",
-           "selection":"MULITPLE",
-           "currency":"INR",
-           "fixedAmt":2000,
-           "payTowardsType":"First Pay Towards Type-Second Group"
-        },
-        {
-           "displayOrder":2,
-           "minAmt":4000,
-           "conversionRate":0,
-           "showOnWeb":"Y",
-           "groupName":"Second Group",
-           "selection":"MULITPLE",
-           "currency":"INR",
-           "fixedAmt":4000,
-           "payTowardsType":"Second Pay Towards Type-Second Group"
-        },
-        {
-           "displayOrder":3,
-           "minAmt":1500,
-           "conversionRate":0,
-           "showOnWeb":"Y",
-           "groupName":"Second Group",
-           "selection":"MULITPLE",
-           "currency":"INR",
-           "fixedAmt":4000,
-           "payTowardsType":"Third Pay Towards Type-Second Group"
-        }
-     ]
-
-     this.metaPayTowardsSINGLE = this.metaPayTowards.filter(mt=>mt.selection === 'SINGLE');
+         {
+           "id": 1,
+            "displayOrder":1,
+            "minAmt":500,
+            "conversionRate":0,
+            "showOnWeb":"Y",
+            "groupName":"First Group",
+            "selection":"SINGLE",
+            "currency":"INR",
+            "fixedAmt":500,
+            "payTowardsType":"First Pay Towards Type",
+            "required": true
+         },
+         {
+           "id": 2,
+            "displayOrder":2,
+            "minAmt":1000,
+            "conversionRate":0,
+            "showOnWeb":"Y",
+            "groupName":"First Group",
+            "selection":"SINGLE",
+            "currency":"INR",
+            "fixedAmt":1000,
+            "payTowardsType":"Second Pay Towards Type",
+            "required": true
+            
+         },
+         {"id": 3,
+            "displayOrder":3,
+            "minAmt":1500,
+            "conversionRate":0,
+            "showOnWeb":"Y",
+            "groupName":"First Group",
+            "selection":"SINGLE",
+            "currency":"INR",
+            "fixedAmt":1500,
+            "payTowardsType":"Third Pay Towards Type",
+            "required": true
+         },
+         {
+           "id": 4,
+            "displayOrder":1,
+            "minAmt":2000,
+            "conversionRate":0,
+            "showOnWeb":"Y",
+            "groupName":"Second Group",
+            "selection":"MULTIPLE",
+            "currency":"INR",
+            "fixedAmt":2000,
+            "payTowardsType":"First Pay Towards Type-Second Group",
+            "required": true
+         },
+         {
+           "id": 5,
+            "displayOrder":2,
+            "minAmt":4000,
+            "conversionRate":0,
+            "showOnWeb":"Y",
+            "groupName":"Second Group",
+            "selection":"MULTIPLE",
+            "currency":"INR",
+            "fixedAmt":4000,
+            "payTowardsType":"Second Pay Towards Type-Second Group",
+            "required": true
+         },
+         {
+           "id": 6,
+            "displayOrder":3,
+            "minAmt":1500,
+            "conversionRate":0,
+            "showOnWeb":"Y",
+            "groupName":"Second Group",
+            "selection":"MULTIPLE",
+            "currency":"INR",
+            "fixedAmt":4000,
+            "payTowardsType":"Third Pay Towards Type-Second Group",
+            "required": true
+         }
+      ]
 
      this.value = ko.observable();
      this.amount = ko.observable();
-
+      this.handleValidate = () => {
+        const el = document.getElementById('validate')
+const valid = el.getProperty('valid')
+if(valid !== 'valid'){
+el.showMessages()
+}
+      }
       this.connected = () => {
         accUtils.announce('Dashboard page loaded.', 'assertive');
         document.title = "Dashboard";
