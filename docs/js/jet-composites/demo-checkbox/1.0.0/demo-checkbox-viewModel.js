@@ -59,9 +59,8 @@ define(
       this.properties.setProperty('valid','pending')
           if(this.properties.required && value){
             this.properties.setProperty('valid', this.showMessage() ?'invalidShown': 'invalidHidden')
-          }else{
-            this.properties.setProperty('valid',this.groupValid())
           }
+          this.properties.setProperty('valid',this.groupValid())
     };
     //Lifecycle methods - uncomment and implement if necessary 
     //ExampleComponentModel.prototype.activated = function(context){

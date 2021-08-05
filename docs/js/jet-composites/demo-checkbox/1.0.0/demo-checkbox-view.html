@@ -8,7 +8,7 @@
         <div class="oj-sm-6">
           <oj-bind-text value="[[$properties.options[$current.index].payTowardsType]]"></oj-bind-text>
         </div>
-        <oj-input-number min="[[$properties.options[$current.index].minAmt]]"
+        <oj-input-number min="[[$current.data.value().length === 1 ? $properties.options[$current.index].minAmt: 0]]"
           readonly="[[$current.data.value().length === 0]]" value="{{ $current.data.amount }}"
           :id="[[$properties.options[$current.index].id]]" class="oj-sm-4">
         </oj-input-number>
